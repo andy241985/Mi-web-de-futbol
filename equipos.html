@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipos - Fútbol Argentino</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Fútbol Argentino</h1>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Torneos y copas</a>
+                    <div class="dropdown-content">
+                        <a href="index.html#Liga">Liga profesional</a>
+                        <a href="index.html#copaLiga">Copa de la liga</a>
+                    </div>
+                </li>
+                <li><a href="equipos.html">Equipos</a></li>
+                <li><a href="seleccion.html">Selección</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="Equipos">
+        <h2>Equipos</h2>
+        <ul id="equipos-list"></ul>
+    </section>
+
+    <script>
+        fetch('/equipos')
+            .then(response => response.json())
+            .then(data => {
+                const equiposList = document.getElementById('equipos-list');
+                data.forEach(equipo => {
+                    const li = document.createElement('li');
+                    li.textContent = `${equipo.nombre} - ${equipo.estadio} - ${equipo.fundacion}`;
+                    equiposList.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
